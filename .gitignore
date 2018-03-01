@@ -1,0 +1,9 @@
+Debug/
+Release/
+.vs/
+testImages/
+faceLib/
+features/
+camera_face/
+resource/
+lib/

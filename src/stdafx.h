@@ -1,0 +1,12 @@
+#pragma once
+#include <vector>
+#include <map>
+#include <stdlib.h>
+#include <stdint.h>
+#include <Windows.h>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <memory>
+#include <io.h>
+#include <direct.h>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\DirControl.cpp" />
+    <ClCompile Include="..\src\FaceDetection.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\DirControl.h" />
+    <ClInclude Include="..\src\FaceDetection.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{D76FDE92-3CC5-45DC-9BC6-47A8073312E0}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>FaceDetection</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)\..\dep\sqlite3 C++;$(ProjectDir)\..\dep\opencv2.4.10\build\include\opencv2;$(ProjectDir)\..\dep\opencv2.4.10\build\include\opencv;$(ProjectDir)\..\dep\opencv2.4.10\build\include;$(ProjectDir)\..\dep\caffe\NugetPackages\protobuf-v120.2.6.1\build\native\include;$(ProjectDir)\..\dep\caffe\NugetPackages\gflags.2.1.2.1\build\native\include;$(ProjectDir)\..\dep\caffe\NugetPackages\glog.0.3.3.0\build\native\include;$(ProjectDir)\..\dep\caffe\NugetPackages\boost.1.59.0.0\lib\native\include;$(ProjectDir)\..\dep\caffe\caffe-master\include;$(ProjectDir)\..\dep\caffe\NugetPackages\OpenCV.2.4.10\build\native\include;$(ProjectDir)\..\dep\caffe\NugetPackages\OpenBLAS.0.2.14.1\lib\native\include;$(ProjectDir)\..\dep\CyUSB\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\..\dep\sqlite3 C++;$(ProjectDir)\..\dep\boost_1_59_0\lib64-msvc-12.0;$(ProjectDir)\..\dep\caffe\NugetPackages\OpenBLAS.0.2.14.1\lib\native\lib\x64;$(ProjectDir)\..\dep\caffe\NugetPackages\protobuf-v120.2.6.1\build\native\lib\x64\v120\Debug;$(ProjectDir)\..\dep\caffe\NugetPackages\hdf5-v120-complete.1.8.15.2\lib\native\lib\x64;$(ProjectDir)\..\dep\caffe\NugetPackages\gflags.2.1.2.1\build\native\x64\v120\static\Lib;$(ProjectDir)\..\dep\caffe\NugetPackages\boost_chrono-vc120.1.59.0.0\lib\native\address-model-64\lib;$(ProjectDir)\..\dep\caffe\NugetPackages\boost_thread-vc120.1.59.0.0\lib\native\address-model-64\lib;$(ProjectDir)\..\dep\caffe\NugetPackages\glog.0.3.3.0\build\native\lib\x64\v120\Debug\dynamic;$(ProjectDir)\..\dep\caffe\NugetPackages\boost_system-vc120.1.59.0.0\lib\native\address-model-64\lib;$(ProjectDir)\..\dep\caffe\NugetPackages\boost_filesystem-vc120.1.59.0.0\lib\native\address-model-64\lib;$(ProjectDir)\..\dep\caffe\NugetPackages\boost_date_time-vc120.1.59.0.0\lib\native\address-model-64\lib;$(ProjectDir)\..\dep\opencv2.4.10\build\x64\vc12\lib;$(ProjectDir)\..\dep\caffe\caffe-master\Build\x64\Debug;$(ProjectDir)\..\dep\caffe\NugetPackages\OpenCV.2.4.10\build\native\lib\x64\v120\Debug;$(ProjectDir)\..\dep\caffe\NugetPackages\LevelDB-vc120.1.2.0.0\build\native\lib\x64\v120\Debug;$(ProjectDir)\..\dep\caffe\NugetPackages\lmdb-v120-clean.0.9.14.0\lib\native\lib\x64;$(ProjectDir)\..\dep\CyUSB\lib\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>D:\opencv2.4.10\build\include;D:\opencv2.4.10\build\include\opencv;D:\opencv2.4.10\build\include\opencv2;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\opencv2.4.10\build\x86\vc12\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir)\..\dep\sqlite3 C++;$(ProjectDir)\..\dep\opencv2.4.10\build\include\opencv2;$(ProjectDir)\..\dep\opencv2.4.10\build\include\opencv;$(ProjectDir)\..\dep\opencv2.4.10\build\include;$(ProjectDir)\..\dep\caffe\NugetPackages\protobuf-v120.2.6.1\build\native\include;$(ProjectDir)\..\dep\caffe\NugetPackages\gflags.2.1.2.1\build\native\include;$(ProjectDir)\..\dep\caffe\NugetPackages\glog.0.3.3.0\build\native\include;$(ProjectDir)\..\dep\caffe\NugetPackages\boost.1.59.0.0\lib\native\include;$(ProjectDir)\..\dep\caffe\caffe-master\include;$(ProjectDir)\..\dep\caffe\NugetPackages\OpenCV.2.4.10\build\native\include;$(ProjectDir)\..\dep\caffe\NugetPackages\OpenBLAS.0.2.14.1\lib\native\include;$(ProjectDir)\..\dep\CyUSB\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\..\dep\sqlite3 C++;$(ProjectDir)\..\dep\boost_1_59_0\lib64-msvc-12.0;$(ProjectDir)\..\dep\caffe\NugetPackages\OpenBLAS.0.2.14.1\lib\native\lib\x64;$(ProjectDir)\..\dep\caffe\NugetPackages\protobuf-v120.2.6.1\build\native\lib\x64\v120\Release;$(ProjectDir)\..\dep\caffe\NugetPackages\hdf5-v120-complete.1.8.15.2\lib\native\lib\x64;$(ProjectDir)\..\dep\caffe\NugetPackages\gflags.2.1.2.1\build\native\x64\v120\static\Lib;$(ProjectDir)\..\dep\caffe\NugetPackages\boost_chrono-vc120.1.59.0.0\lib\native\address-model-64\lib;$(ProjectDir)\..\dep\caffe\NugetPackages\boost_thread-vc120.1.59.0.0\lib\native\address-model-64\lib;$(ProjectDir)\..\dep\caffe\NugetPackages\glog.0.3.3.0\build\native\lib\x64\v120\Release\dynamic;$(ProjectDir)\..\dep\caffe\NugetPackages\boost_system-vc120.1.59.0.0\lib\native\address-model-64\lib;$(ProjectDir)\..\dep\caffe\NugetPackages\boost_filesystem-vc120.1.59.0.0\lib\native\address-model-64\lib;$(ProjectDir)\..\dep\caffe\NugetPackages\boost_date_time-vc120.1.59.0.0\lib\native\address-model-64\lib;$(ProjectDir)\..\dep\opencv2.4.10\build\x64\vc12\lib;$(ProjectDir)\..\dep\caffe\caffe-master\Build\x64\Release;$(ProjectDir)\..\dep\caffe\NugetPackages\OpenCV.2.4.10\build\native\lib\x64\v120\Release;$(ProjectDir)\..\dep\caffe\NugetPackages\LevelDB-vc120.1.2.0.0\build\native\lib\x64\v120\Release;$(ProjectDir)\..\dep\caffe\NugetPackages\lmdb-v120-clean.0.9.14.0\lib\native\lib\x64;$(ProjectDir)\..\dep\CyUSB\lib\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;FACEDETECTION_EXPORTS;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>sqlite3_x64.lib;libboost_date_time-vc120-mt-gd-1_59.lib;libboost_filesystem-vc120-mt-gd-1_59.lib;libboost_system-vc120-mt-gd-1_59.lib;libglog.lib;libcaffe.lib;gflagsd.lib;gflags_nothreadsd.lib;hdf5.lib;hdf5_hl.lib;libprotobuf.lib;libopenblas.dll.a;Shlwapi.lib;LevelDb.lib;lmdb.lib;opencv_calib3d2410d.lib;opencv_contrib2410d.lib;opencv_core2410d.lib;opencv_features2d2410d.lib;opencv_flann2410d.lib;opencv_gpu2410d.lib;opencv_highgui2410d.lib;opencv_imgproc2410d.lib;opencv_legacy2410d.lib;opencv_ml2410d.lib;opencv_video2410d.lib;opencv_objdetect2410d.lib;opencv_ts2410d.lib;cyapi.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;FACEDETECTION_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;FACEDETECTION_EXPORTS;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>opencv_highgui2410.lib;opencv_imgproc2410.lib;opencv_objdetect2410.lib;opencv_core2410.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;FACEDETECTION_EXPORTS;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>sqlite3_x64.lib;libboost_date_time-vc120-mt-1_59.lib;libboost_filesystem-vc120-mt-1_59.lib;libboost_system-vc120-mt-1_59.lib;libglog.lib;libcaffe.lib;gflags.lib;gflags_nothreads.lib;hdf5.lib;hdf5_hl.lib;libprotobuf.lib;libopenblas.dll.a;Shlwapi.lib;LevelDb.lib;lmdb.lib;opencv_calib3d2410.lib;opencv_contrib2410.lib;opencv_core2410.lib;opencv_features2d2410.lib;opencv_flann2410.lib;opencv_gpu2410.lib;opencv_highgui2410.lib;opencv_imgproc2410.lib;opencv_legacy2410.lib;opencv_ml2410.lib;opencv_video2410.lib;opencv_objdetect2410.lib;opencv_ts2410.lib;cyapi.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
