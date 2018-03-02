@@ -21,11 +21,16 @@ using namespace std;
 
 
 
-
 extern"C"
 {
 	void FACECOMPAREDLL addToFaceLib();
-	float FACECOMPAREDLL faceCompare(char* face1, char* face2, bool unInit);
-	char FACECOMPAREDLL *faceSearch(char* face);
+	int FACECOMPAREDLL FeatureExact(const char* input_image_path, AFR_FSDK_FACEMODEL &faceModels, bool unInit);
+	float FACECOMPAREDLL faceCompare(const char* face1, const char* face2, bool unInit);
+	float FACECOMPAREDLL faceToFeatureCompare(const char* face, AFR_FSDK_FACEMODEL faceModel, bool unInit);
+
+	char  FACECOMPAREDLL * faceSearch(const char* face);
 	void FACECOMPAREDLL faceSearchApp();
+
+	void FACECOMPAREDLL addOneToFeatureLib(const char* peopleName, const char* input_image_path, bool uninit);
+	AFR_FSDK_FACEMODEL FACECOMPAREDLL loadLocalFeature(const char* name);
 }

@@ -92,7 +92,7 @@ bool readBmp(const char* path, uint8_t **imageData, int *pWidth, int *pHeight)
 	return true;
 }
 //人类图片(bmp)特征提取
-int FeatureExact(char* input_image_path, AFR_FSDK_FACEMODEL &faceModels, bool unInit)
+int FeatureExact(const char* input_image_path, AFR_FSDK_FACEMODEL &faceModels, bool unInit)
 {
 	initEngine();
 	ASVLOFFSCREEN offInput = { 0 };
@@ -136,51 +136,48 @@ int FeatureExact(char* input_image_path, AFR_FSDK_FACEMODEL &faceModels, bool un
 	return 0;
 }
 
-//将特征存储到本地
-//int saveFeature(char* peopleName, char* input_image_path)
-//{
-//	//初始化引擎
-//	nRet = MERR_UNKNOWN;
-//	hEngine = nullptr;
-//	pWorkMem = (MByte *)malloc(WORKBUF_SIZE);
-//	if (pWorkMem == nullptr)
-//	{
-//		fprintf(stderr, "fail to malloc workbuf\r\n");
-//		//system("pause");
-//		return -1;
-//	}
-//	nRet = AFR_FSDK_InitialEngine(APPID, SDKKey, pWorkMem, WORKBUF_SIZE, &hEngine);
-//	if (nRet != MOK || hEngine == nullptr)
-//	{
-//		fprintf(stderr, "InitialFaceEngine failed , errorcode is %d \r\n", nRet);
-//		//system("pause");
-//		return -1;
-//	}
-//
-//	AFR_FSDK_FACEMODEL faceModel = { 0 };
-//	if (FeatureExact(input_image_path, faceModel) == -1)
-//		return -1;
-//	string strName(peopleName);
-//	string path = "../features/" + strName;
-//	ofstream out(path);
-//	//out << name;
-//	for (int i = 0; i < faceModel.lFeatureSize; i++)
-//	{
-//		out.put(faceModel.pbFeature[i]);
-//	}
-//	out.close();
-//
-//
-//	//反初始化
-//	nRet = AFR_FSDK_UninitialEngine(hEngine);
-//	if (nRet != MOK)
-//	{
-//		fprintf(stderr, "UninitialFaceEngine failed , errorcode is %d \r\n", nRet);
-//	}
-//	free(pWorkMem);
-//	free(faceModel.pbFeature);
-//	return 0;
-//}
+//将一副图提取出的特征存储到本地
+void addOneToFeatureLib(const char* peopleName, const char* input_image_path, bool uninit)
+{
+	//初始化引擎
+	initEngine();
+	//创建存放特征文件的文件夹
+	if (_access("../featureLib/", 0) == -1)
+	{
+		_mkdir("../featureLib/");
+	}
+	AFR_FSDK_FACEMODEL faceModel = { 0 };
+	if (FeatureExact(input_image_path, faceModel, false) == -1)
+		return;
+	string strName(peopleName);
+	string path = "../featureLib/" + strName;
+	FILE *file;
+	file = fopen(path.c_str(), "wb");
+	fwrite(faceModel.pbFeature, sizeof(MByte), faceModel.lFeatureSize, file);
+	fclose(file);
+
+	//反初始化
+	if (uninit)
+		unInitEngine();
+	free(faceModel.pbFeature);
+	return;
+}
+
+AFR_FSDK_FACEMODEL loadLocalFeature(const char* name)
+{
+	AFR_FSDK_FACEMODEL faceModel = { 0 };
+	faceModel.lFeatureSize = 22020;
+	faceModel.pbFeature = new MByte[22020];
+	string featurePath = name;
+	featurePath = "../featureLib/" + featurePath;
+	FILE *file;
+	file = fopen(featurePath.c_str(), "rb");
+	fread(faceModel.pbFeature, sizeof(MByte), 22020, file);
+	Sleep(0);
+	fclose(file);
+	return faceModel;
+}
+
 
 //从本地文件读取特征
 //int readFeature(char* name, AFR_FSDK_FACEMODEL &faceModel)
@@ -261,7 +258,7 @@ int loadLocalFaceLib(map<string, AFR_FSDK_FACEMODEL> &featureLib)
 	return 0;
 }
 
-float faceCompare(char* face1, char* face2, bool unInit)
+float faceCompare(const char* face1, const char* face2, bool unInit)
 {
 	//初始化
 	initEngine();
@@ -301,14 +298,41 @@ float faceCompare(char* face1, char* face2, bool unInit)
 	return fSimilScore;
 }
 
-char* faceSearch(char* face)
+float faceToFeatureCompare(const char * face, AFR_FSDK_FACEMODEL faceModel, bool unInit)
+{
+	//初始化
+	initEngine();
+	//抽取特征1
+	AFR_FSDK_FACEMODEL faceModels1 = { 0 };
+	FeatureExact(face, faceModels1, false);
+
+	MFloat  fSimilScore = 0.0f;
+	nRet = AFR_FSDK_FacePairMatching(hEngine, &faceModels1, &faceModel, &fSimilScore);
+	if (nRet == MOK)
+	{
+		//fprintf(stdout, "fSimilScore =  %f\r\n", fSimilScore);
+	}
+	else
+	{
+		fprintf(stderr, "FacePairMatching failed , errorcode is %d \r\n", nRet);
+	}
+
+	//反初始化
+	if (unInit)
+		unInitEngine();
+
+	free(faceModels1.pbFeature);
+	return fSimilScore;
+}
+
+char* faceSearch(const char* face)
 {
 	//初始化
 	initEngine();
 
 	AFR_FSDK_FACEMODEL faceModels1 = { 0 };
 	AFR_FSDK_FACEMODEL faceModels2 = { 0 };
-	
+
 	FeatureExact(face, faceModels1, false);
 	loadLocalFaceLib(featureLib);
 
@@ -329,7 +353,7 @@ char* faceSearch(char* face)
 		if (sim > maxSim)
 		{
 			maxSim = sim;
-			predictPeople =(char*)i->first.c_str();
+			predictPeople = (char*)i->first.c_str();
 		}
 		if (maxSim < 0.5)
 			predictPeople = "Not in Lib!";
